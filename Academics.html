@@ -1,0 +1,644 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academics - Ahmedan Anglo Oriental School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            font-size: 16px; /* Base font size for rem units */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .page1 {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 100vh; /* Flexible height */
+            min-height: 400px;
+        }
+
+        .bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1rem 2rem;
+            position: relative;
+            flex-wrap: wrap;
+        }
+
+        .left-side a img {
+            width: 7.5rem; /* rem for scalability */
+        }
+
+        .right-side a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+
+        .upper-menu,
+        .lower-menu {
+            display: flex;
+            gap: 1.5rem;
+            padding: 0.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .upper-menu {
+            margin-bottom: 1rem;
+            position: relative;
+            left: 0; /* Adjusted for mobile */
+        }
+
+        .lower-menu > .dropdown-link > a {
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            display: inline-block;
+        }
+
+        .dropdown-link:hover > a {
+            color: #0056b3;
+            transition: color 0.3s;
+        }
+
+        .dropdown-link {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 0.5rem;
+            z-index: 1000;
+            min-width: 30rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-link:hover .dropdown-content {
+            display: flex;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .mega-menu {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .menu-column {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .menu-image-placeholder img {
+            width: 15rem;
+            border-radius: 0.5rem;
+        }
+
+        .dropdown-content a {
+            color: #555;
+        }
+
+        .dropdown-content a:hover {
+            color: #0066cc;
+            transition: color 0.3s;
+        }
+
+        .page1 h1 {
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            transform: translate(-50%, -50%);
+            color: yellow;
+            -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+            text-align: center;
+            text-shadow: 5px 3px 5px black;
+            font-family: "EB Garamond", serif;
+            font-weight: 800;
+            font-size: 3rem;
+        }
+
+        .page1 button {
+            color: white;
+            background-image: linear-gradient(#8AC640, #FFF101);
+            padding: 1.25rem 2.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: monospace;
+            border-radius: 3rem;
+            position: absolute;
+            left: 50%;
+            top: 60%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .page1 button:hover {
+            background-color: #0056b3;
+            border-radius: 0;
+            width: 18rem;
+        }
+
+        .academics-container {
+            display: flex;
+            max-width: 75rem;
+            margin: 3rem auto;
+            padding: 0 1rem;
+            flex-direction: column; /* Mobile-first */
+        }
+
+        .sidebar {
+            width: 100%;
+            background-color: #f0f0f0;
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .sidebar button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1.125rem;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar button.active {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        .sidebar button:hover {
+            background-color: #e46b0f;
+            color: white;
+        }
+
+        .content-area {
+            width: 100%;
+            padding: 1rem;
+        }
+
+        .section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: #0056b3;
+            font-family: 'EB Garamond', serif;
+            margin-bottom: 1rem;
+        }
+
+        .section p {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            font-size: 1.25rem;
+            color: #555;
+            text-align: left;
+        }
+
+        ul li {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        ul li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #e46b0f;
+        }
+
+        footer {
+            width: 100%;
+            background-color: #2D3778;
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        .upper-footer h3 {
+            font-size: 1.25rem;
+        }
+
+        .upper-footer p {
+            font-size: 1.125rem;
+            max-width: 50rem;
+            margin: 1rem auto;
+        }
+
+        footer img {
+            width: 7.5rem;
+            margin: 1rem 0;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: white;
+            margin: 1rem 0;
+        }
+
+        .lower-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .upper-links, .lower-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .upper-links a, .lower-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .footer-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-icons img {
+            width: 2.5rem;
+        }
+
+        /* Media Queries - Mobile-first enhancements */
+        @media (min-width: 480px) {
+            .page1 h1 {
+                font-size: 3.5rem;
+            }
+
+            .page1 button {
+                padding: 1.5rem 3rem;
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .academics-container {
+                flex-direction: row;
+            }
+
+            .sidebar {
+                width: 25%;
+                border-bottom: none;
+                border-right: 1px solid #ddd;
+            }
+
+            .content-area {
+                width: 75%;
+            }
+
+            .upper-menu {
+                left: 15rem; /* Restore for larger screens */
+            }
+        }
+
+        @media (min-width: 1024px) {
+            header {
+                padding: 1.25rem 3.75rem;
+            }
+
+            .page1 {
+                height: 50vw;
+            }
+
+            .page1 h1 {
+                font-size: 4rem;
+            }
+        }
+
+        @media (min-width: 1440px) {
+            .academics-container {
+                max-width: 90rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page1">
+        <img class="bg-video" src="img/IMG-20251018-WA0106.jpg" alt="Students in classroom">
+        
+        <header>
+            <div class="left-side">
+                <a href="index.html">
+                    <img src="img/LOGO1.png" alt="Ahmedan School Logo">
+                </a>
+            </div>
+
+            <div class="right-side">
+                <div class="upper-menu">
+                    <a href="#">Calendar</a>
+                    <a href="#">Teachers</a>
+                    <a href="#">Fees Structure</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Portal</a>
+                </div>
+
+                <div class="lower-menu">
+                    <div class="dropdown-link">
+                        <a href="About.html">About</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="About.html#overview">Overview</a>
+                                <a href="About.html#mission-vision">Our Mission & Vision</a>
+                                <a href="About.html#history-values">History & Values</a>
+                                <a href="About.html#leadership">School Leadership</a>
+                                <a href="About.html#staff-directory">Staff Directory</a>
+                                <a href="About.html#facilities">School Facilities</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0077.jpg" alt="Children at the School Playground">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-link">
+                        <a href="#">Academics</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="#curriculum-overview">Curriculum Overview</a>
+                                <a href="#primary-i">Primary I (Grades 1-3)</a>
+                                <a href="#primary-ii">Primary II (Grades 4-5)</a>
+                                <a href="#subjects-taught">Subjects Taught</a>
+                                <a href="#teaching-methodology">Teaching Methodology</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0106.jpg" alt="Students in Classroom">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-link">
+                        <a href="Admissions.html">Admissions</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="Admissions.html#overview-eligibility">Overview & Eligibility</a>
+                                <a href="Admissions.html#admission-process">Admission Process</a>
+                                <a href="Admissions.html#fee-structure">Fee Structure</a>
+                                <a href="Admissions.html#required-documents">Required Documents</a>
+                                <a href="Admissions.html#important-dates">Important Dates</a>
+                                <a href="Admissions.html#apply-online">Apply Online</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0059.jpg" alt="Parents talking to staff">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-link">
+                        <a href="School Life.html">School Life</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="#">Daily Schedule</a>
+                                <a href="#">Co-Curricular Activities</a>
+                                <a href="#">Sports & Games</a>
+                                <a href="#">School Events (Annual Day)</a>
+                                <a href="#">Uniform & Discipline</a>
+                                <a href="#">Parent-Teacher Association</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0036.jpg" alt="Children playing">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <h1>Academics at Ahmedan Anglo Oriental School <br>Building Foundations for Success</h1>
+        <button onclick="scrollToContent()">Explore Our Curriculum</button>
+    </div>
+
+    <div class="academics-container">
+        <div class="sidebar">
+            <button data-section="curriculum-overview" class="active">Curriculum Overview</button>
+            <button data-section="primary-i">Primary I (Grades 1-3)</button>
+            <button data-section="primary-ii">Primary II (Grades 4-5)</button>
+            <button data-section="subjects-taught">Subjects Taught</button>
+            <button data-section="teaching-methodology">Teaching Methodology</button>
+        </div>
+        <div class="content-area">
+            <div id="curriculum-overview" class="section active">
+                <h2>Curriculum Overview</h2>
+                <p>At Ahmedan Anglo Oriental School, our curriculum is designed to foster holistic development, combining academic rigor with character building. Aligned with national standards and incorporating global best practices, it emphasizes critical thinking, creativity, and ethical values from Nursery to Grade 8.</p>
+                
+                <p>Our approach integrates modern teaching methods with traditional values, preparing students for future challenges while nurturing their individual talents. The curriculum is regularly updated to include emerging technologies and contemporary issues.</p>
+                
+                <ul>
+                    <li>Balanced blend of core subjects and co-curricular activities</li>
+                    <li>Focus on STEM education alongside arts and humanities</li>
+                    <li>Emphasis on language skills and cultural awareness</li>
+                    <li>Incorporation of life skills and character education</li>
+                    <li>Progressive learning from foundational to advanced concepts</li>
+                </ul>
+            </div>
+
+            <div id="primary-i" class="section">
+                <h2>Primary I (Grades 1-3)</h2>
+                <p>In the early primary years, we focus on building strong foundations in basic skills while making learning fun and engaging. Our program encourages curiosity, creativity, and confidence through play-based and interactive activities.</p>
+                
+                <ul>
+                    <li>Development of reading, writing, and numeracy skills</li>
+                    <li>Introduction to science and social studies through hands-on experiments</li>
+                    <li>Basic computer literacy and digital awareness</li>
+                    <li>Art, music, and physical education for holistic growth</li>
+                    <li>Emphasis on social-emotional learning and values education</li>
+                </ul>
+                
+                <p>Classes are kept small to ensure personalized attention, with a student-teacher ratio of 20:1. Assessment is continuous and formative, focusing on progress rather than competition.</p>
+            </div>
+
+            <div id="primary-ii" class="section">
+                <h2>Primary II (Grades 4-5)</h2>
+                <p>As students progress to upper primary, we build on the foundations laid earlier, introducing more structured learning while maintaining an element of discovery. This stage prepares students for middle school by developing independent thinking and study skills.</p>
+                
+                <ul>
+                    <li>Advanced language arts with reading comprehension and creative writing</li>
+                    <li>Mathematics including basic geometry and problem-solving</li>
+                    <li>Science with simple experiments and environmental awareness</li>
+                    <li>Social studies covering history, geography, and civics</li>
+                    <li>Introduction to foreign languages and advanced computer skills</li>
+                </ul>
+                
+                <p>We incorporate project-based learning and group activities to foster teamwork and leadership skills. Regular field trips and guest lectures enrich the curriculum.</p>
+            </div>
+
+            <div id="subjects-taught" class="section">
+                <h2>Subjects Taught</h2>
+                <p>Our comprehensive curriculum covers a wide range of subjects to provide a well-rounded education. Core subjects are taught across all grades, with electives introduced in higher levels.</p>
+                
+                <ul>
+                    <li><strong>English:</strong> Language arts, literature, and communication skills</li>
+                    <li><strong>Mathematics:</strong> Arithmetic, algebra, geometry, and logical reasoning</li>
+                    <li><strong>Science:</strong> Physics, chemistry, biology, and environmental science</li>
+                    <li><strong>Social Studies:</strong> History, geography, civics, and economics</li>
+                    <li><strong>Languages:</strong> Urdu, Sindhi, and introductory Arabic or French</li>
+                    <li><strong>Computer Science:</strong> Basic programming, digital literacy, and internet safety</li>
+                    <li><strong>Arts:</strong> Visual arts, music, and performing arts</li>
+                    <li><strong>Physical Education:</strong> Sports, yoga, and health education</li>
+                    <li><strong>Islamic Studies/Ethics:</strong> Moral values and character development</li>
+                </ul>
+                
+                <p>Subjects are integrated where possible to show real-world connections, enhancing student engagement and understanding.</p>
+            </div>
+
+            <div id="teaching-methodology" class="section">
+                <h2>Teaching Methodology</h2>
+                <p>Our teaching methodology is student-centered, blending traditional and modern approaches to cater to diverse learning styles. We employ a mix of instructional strategies to ensure effective learning for all students.</p>
+                
+                <ul>
+                    <li>Interactive lectures and discussions for conceptual understanding</li>
+                    <li>Hands-on experiments and projects for practical application</li>
+                    <li>Technology integration with smart boards and educational software</li>
+                    <li>Collaborative learning through group activities and peer teaching</li>
+                    <li>Differentiated instruction to address individual needs</li>
+                    <li>Formative assessments and regular feedback for continuous improvement</li>
+                    <li>Inquiry-based learning to foster critical thinking</li>
+                    <li>Integration of real-world examples and case studies</li>
+                </ul>
+                
+                <p>Our teachers undergo regular professional development to stay updated with the latest educational practices. We also encourage parental involvement in the learning process.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="upper-footer">
+            <h3>Notice of Nondiscriminatory Policy as to Students</h3>
+            <p>Ahmedan Anglo Oriental School welcomes students from all backgrounds and provides equal opportunities to every child. The school does not discriminate on the basis of race, color, religion, language, nationality, or social background in the administration of its educational programs, admissions, or activities. Every student is entitled to the same rights, respect, and learning opportunities within our inclusive environment.</p>
+        </div>
+        <img src="img/LOGO1.png" alt="Logo">
+        <hr>
+
+        <div class="lower-footer">
+            <div class="upper-links">
+                <a href="About.html">About</a>
+                <a href="#">Academics</a>
+                <a href="Admissions.html">Admission</a>
+                <a href="#">School Life</a>
+            </div>
+            <div class="lower-links">
+                <a href="#">Calendar</a>
+                <a href="#">Teachers</a>
+                <a href="#">Fees Structure</a>
+                <a href="#">Contact us</a>
+                <a href="#">Portal</a>
+            </div>
+        </div>
+        <div class="footer-icons">
+            <a href="https://www.facebook.com/p/Ahmedan-Anglo-Oriental-School-100057637891490/"><img src="https://cdn-icons-png.flaticon.com/128/20/20837.png" alt="facebook-icon"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1384/1384031.png" alt="insta-icon"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1384/1384028.png" alt="youtube-icon"></a>
+        </div>
+    </footer>
+
+    <script>
+        const buttons = document.querySelectorAll('.sidebar button');
+        const sections = document.querySelectorAll('.section');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const sectionId = button.dataset.section;
+
+                buttons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                sections.forEach(sec => sec.classList.remove('active'));
+                document.getElementById(sectionId).classList.add('active');
+
+                history.pushState(null, '', `#${sectionId}`);
+            });
+        });
+
+        // Handle initial load and hash change
+        function loadSectionFromHash() {
+            const hash = window.location.hash.slice(1);
+            if (hash) {
+                const targetButton = document.querySelector(`[data-section="${hash}"]`);
+                if (targetButton) {
+                    targetButton.click();
+                }
+            } else {
+                // Default to curriculum-overview
+                document.querySelector('[data-section="curriculum-overview"]').click();
+            }
+        }
+
+        window.addEventListener('load', loadSectionFromHash);
+        window.addEventListener('hashchange', loadSectionFromHash);
+
+        function scrollToContent() {
+            document.querySelector('.academics-container').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

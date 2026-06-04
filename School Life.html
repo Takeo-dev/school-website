@@ -1,0 +1,725 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Life - Ahmedan Anglo Oriental School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            font-size: 16px; /* Base font size for rem units */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .page1 {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 100vh; /* Flexible height */
+            min-height: 400px;
+        }
+
+        .bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1rem 2rem;
+            position: relative;
+            flex-wrap: wrap;
+        }
+
+        .left-side a img {
+            width: 7.5rem; /* rem for scalability */
+        }
+
+        .right-side a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+
+        .upper-menu,
+        .lower-menu {
+            display: flex;
+            gap: 1.5rem;
+            padding: 0.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .upper-menu {
+            margin-bottom: 1rem;
+            position: relative;
+            left: 0; /* Adjusted for mobile */
+        }
+
+        .lower-menu > .dropdown-link > a {
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            display: inline-block;
+        }
+
+        .dropdown-link:hover > a {
+            color: #0056b3;
+            transition: color 0.3s;
+        }
+
+        .dropdown-link {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 0.5rem;
+            z-index: 1000;
+            min-width: 30rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-link:hover .dropdown-content {
+            display: flex;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .mega-menu {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .menu-column {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .menu-image-placeholder img {
+            width: 15rem;
+            border-radius: 0.5rem;
+        }
+
+        .dropdown-content a {
+            color: #555;
+        }
+
+        .dropdown-content a:hover {
+            color: #0066cc;
+            transition: color 0.3s;
+        }
+
+        .page1 h1 {
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            transform: translate(-50%, -50%);
+            color: yellow;
+            -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+            text-align: center;
+            text-shadow: 5px 3px 5px black;
+            font-family: "EB Garamond", serif;
+            font-weight: 800;
+            font-size: 3rem;
+        }
+
+        .page1 button {
+            color: white;
+            background-image: linear-gradient(#8AC640, #FFF101);
+            padding: 1.25rem 2.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: monospace;
+            border-radius: 3rem;
+            position: absolute;
+            left: 50%;
+            top: 60%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .page1 button:hover {
+            background-color: #0056b3;
+            border-radius: 0;
+            width: 18rem;
+        }
+
+        .school-life-container {
+            display: flex;
+            max-width: 75rem;
+            margin: 3rem auto;
+            padding: 0 1rem;
+            flex-direction: column; /* Mobile-first */
+        }
+
+        .sidebar {
+            width: 100%;
+            background-color: #f0f0f0;
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .sidebar button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1.125rem;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar button.active {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        .sidebar button:hover {
+            background-color: #e46b0f;
+            color: white;
+        }
+
+        .content-area {
+            width: 100%;
+            padding: 1rem;
+        }
+
+        .section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: #0056b3;
+            font-family: 'EB Garamond', serif;
+            margin-bottom: 1rem;
+        }
+
+        .section p {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 3rem;
+        }
+
+        .schedule-table th, .schedule-table td {
+            padding: 0.9375rem;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .schedule-table th {
+            background-color: #FED051;
+            color: #0056b3;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            font-size: 1.25rem;
+            color: #555;
+            text-align: left;
+        }
+
+        ul li {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        ul li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #e46b0f;
+        }
+
+        .events-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .event-item {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0.625rem;
+            box-shadow: 0 0.25rem 0.625rem rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .event-item img {
+            margin-bottom: 1rem;
+            border-radius: 0.3125rem;
+        }
+
+        footer {
+            width: 100%;
+            background-color: #2D3778;
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        .upper-footer h3 {
+            font-size: 1.25rem;
+        }
+
+        .upper-footer p {
+            font-size: 1.125rem;
+            max-width: 50rem;
+            margin: 1rem auto;
+        }
+
+        footer img {
+            width: 7.5rem;
+            margin: 1rem 0;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: white;
+            margin: 1rem 0;
+        }
+
+        .lower-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .upper-links, .lower-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .upper-links a, .lower-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .footer-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-icons img {
+            width: 2.5rem;
+        }
+
+        /* Media Queries - Mobile-first enhancements */
+        @media (min-width: 480px) {
+            .page1 h1 {
+                font-size: 3.5rem;
+            }
+
+            .page1 button {
+                padding: 1.5rem 3rem;
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .school-life-container {
+                flex-direction: row;
+            }
+
+            .sidebar {
+                width: 25%;
+                border-bottom: none;
+                border-right: 1px solid #ddd;
+            }
+
+            .content-area {
+                width: 75%;
+            }
+
+            .upper-menu {
+                left: 15rem; /* Restore for larger screens */
+            }
+        }
+
+        @media (min-width: 1024px) {
+            header {
+                padding: 1.25rem 3.75rem;
+            }
+
+            .page1 {
+                height: 50vw;
+            }
+
+            .page1 h1 {
+                font-size: 4rem;
+            }
+        }
+
+        @media (min-width: 1440px) {
+            .school-life-container {
+                max-width: 90rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page1">
+        <img class="bg-video" src="img/IMG-20251018-WA0036.jpg" alt="Children enjoying school activities">
+        
+        <header>
+            <div class="left-side">
+                <a href="index.html">
+                    <img src="img/LOGO1.png" alt="Ahmedan School Logo">
+                </a>
+            </div>
+
+            <div class="right-side">
+                <div class="upper-menu">
+                    <a href="#">Calendar</a>
+                    <a href="#">Teachers</a>
+                    <a href="#">Fees Structure</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Portal</a>
+                </div>
+
+                <div class="lower-menu">
+                    <div class="dropdown-link">
+                        <a href="About.html">About</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="About.html#overview">Overview</a>
+                                <a href="About.html#mission-vision">Our Mission & Vision</a>
+                                <a href="About.html#history-values">History & Values</a>
+                                <a href="About.html#leadership">School Leadership</a>
+                                <a href="About.html#staff-directory">Staff Directory</a>
+                                <a href="About.html#facilities">School Facilities</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0077.jpg" alt="Children at the School Playground">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-link">
+                        <a href="Academics.html">Academics</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="Academics.html#curriculum-overview">Curriculum Overview</a>
+                                <a href="Academics.html#primary-i">Primary I (Grades 1-3)</a>
+                                <a href="Academics.html#primary-ii">Primary II (Grades 4-5)</a>
+                                <a href="Academics.html#subjects-taught">Subjects Taught</a>
+                                <a href="Academics.html#teaching-methodology">Teaching Methodology</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0106.jpg" alt="Students in Classroom">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-link">
+                        <a href="Admissions.html">Admissions</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="Admissions.html#overview-eligibility">Overview & Eligibility</a>
+                                <a href="Admissions.html#admission-process">Admission Process</a>
+                                <a href="Admissions.html#fee-structure">Fee Structure</a>
+                                <a href="Admissions.html#required-documents">Required Documents</a>
+                                <a href="Admissions.html#important-dates">Important Dates</a>
+                                <a href="Admissions.html#apply-online">Apply Online</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0059.jpg" alt="Parents talking to staff">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-link">
+                        <a href="#">School Life</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="#daily-schedule">Daily Schedule</a>
+                                <a href="#co-curricular">Co-Curricular Activities</a>
+                                <a href="#sports-games">Sports & Games</a>
+                                <a href="#school-events">School Events (Annual Day)</a>
+                                <a href="#uniform-discipline">Uniform & Discipline</a>
+                                <a href="#pta">Parent-Teacher Association</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0036.jpg" alt="Children playing">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <h1>School Life at Ahmedan Anglo Oriental School <br>Vibrant, Engaging, and Inspiring</h1>
+        <button onclick="scrollToContent()">Discover Student Life</button>
+    </div>
+
+    <div class="school-life-container">
+        <div class="sidebar">
+            <button data-section="daily-schedule" class="active">Daily Schedule</button>
+            <button data-section="co-curricular">Co-Curricular Activities</button>
+            <button data-section="sports-games">Sports & Games</button>
+            <button data-section="school-events">School Events (Annual Day)</button>
+            <button data-section="uniform-discipline">Uniform & Discipline</button>
+            <button data-section="pta">Parent-Teacher Association</button>
+        </div>
+        <div class="content-area">
+            <div id="daily-schedule" class="section active">
+                <h2>Daily Schedule</h2>
+                <p>Our school day is structured to balance academics, physical activity, and personal development. The schedule promotes a healthy routine while allowing time for creativity and rest.</p>
+                
+                <table class="schedule-table">
+                    <tr>
+                        <th>Time</th>
+                        <th>Activity</th>
+                    </tr>
+                    <tr>
+                        <td>8:00 AM - 8:30 AM</td>
+                        <td>Assembly & Morning Prayer</td>
+                    </tr>
+                    <tr>
+                        <td>8:30 AM - 12:00 PM</td>
+                        <td>Academic Classes</td>
+                    </tr>
+                    <tr>
+                        <td>12:00 PM - 12:30 PM</td>
+                        <td>Lunch Break</td>
+                    </tr>
+                    <tr>
+                        <td>12:30 PM - 2:00 PM</td>
+                        <td>Academic Classes & Activities</td>
+                    </tr>
+                    <tr>
+                        <td>2:00 PM - 2:30 PM</td>
+                        <td>Recess & Free Play</td>
+                    </tr>
+                    <tr>
+                        <td>2:30 PM - 3:30 PM</td>
+                        <td>Co-Curricular Sessions</td>
+                    </tr>
+                    <tr>
+                        <td>3:30 PM</td>
+                        <td>School Dismissal</td>
+                    </tr>
+                </table>
+                
+                <p>Note: Schedule may vary for different grade levels. After-school programs available until 5:00 PM.</p>
+            </div>
+
+            <div id="co-curricular" class="section">
+                <h2>Co-Curricular Activities</h2>
+                <p>Beyond academics, we offer a rich array of co-curricular activities to nurture talents and interests. These programs help students develop well-rounded personalities and life skills.</p>
+                
+                <ul>
+                    <li>Art Club: Painting, drawing, and crafts</li>
+                    <li>Music Society: Vocal and instrumental training</li>
+                    <li>Drama Theater: Acting and public speaking</li>
+                    <li>Debate Team: Critical thinking and oratory skills</li>
+                    <li>Science Club: Experiments and innovation projects</li>
+                    <li>Literary Circle: Reading, writing, and poetry</li>
+                    <li>Environmental Group: Sustainability initiatives</li>
+                </ul>
+                
+                <p>Activities are held weekly, with opportunities to participate in inter-school competitions and exhibitions.</p>
+            </div>
+
+            <div id="sports-games" class="section">
+                <h2>Sports & Games</h2>
+                <p>Physical fitness is integral to our school life. We promote sports as a means of building teamwork, discipline, and healthy lifestyles.</p>
+                
+                <ul>
+                    <li>Cricket: Team practices and matches</li>
+                    <li>Football: Skill development and tournaments</li>
+                    <li>Badminton: Indoor court facilities</li>
+                    <li>Table Tennis: Recreational and competitive play</li>
+                    <li>Athletics: Track and field events</li>
+                    <li>Yoga & Fitness: Daily wellness sessions</li>
+                    <li>Indoor Games: Chess, carrom, and board games</li>
+                </ul>
+                
+                <p>Our sports program includes professional coaching, annual sports day, and participation in district-level competitions.</p>
+            </div>
+
+            <div id="school-events" class="section">
+                <h2>School Events (Annual Day)</h2>
+                <p>Throughout the year, we host exciting events that bring our community together and showcase student talents. These occasions create lasting memories and foster school spirit.</p>
+                
+                <ul>
+                    <li>Annual Day: Cultural performances and awards ceremony</li>
+                    <li>Science Fair: Student projects and demonstrations</li>
+                    <li>Sports Day: Athletic competitions and fun games</li>
+                    <li>Independence Day: Patriotic programs and parades</li>
+                    <li>Eid Celebrations: Cultural activities and feasts</li>
+                    <li>Art Exhibition: Display of student artwork</li>
+                    <li>Field Trips: Educational outings to museums and parks</li>
+                </ul>
+                
+                <p>Our Annual Day is the highlight, featuring spectacular shows prepared over months of rehearsal.</p>
+            </div>
+
+            <div id="uniform-discipline" class="section">
+                <h2>Uniform & Discipline</h2>
+                <p>We believe in fostering a disciplined environment that promotes respect and responsibility. Our uniform policy and code of conduct support this goal.</p>
+                
+                <h3>Uniform Guidelines</h3>
+                <ul>
+                    <li>Boys: White shirt, navy blue trousers, school tie, black shoes</li>
+                    <li>Girls: White shalwar kameez with navy blue dupatta, black shoes</li>
+                    <li>Sports Uniform: School tracksuit for PE days</li>
+                    <li>Winter: Navy blue sweater or blazer</li>
+                    <li>Accessories: School badge, ID card required daily</li>
+                </ul>
+                
+                <h3>Discipline Policy</h3>
+                <p>Our progressive discipline approach focuses on positive reinforcement and learning from mistakes. Rules include punctuality, respect for others, no bullying, and proper use of school property.</p>
+            </div>
+
+            <div id="pta" class="section">
+                <h2>Parent-Teacher Association</h2>
+                <p>The PTA plays a vital role in bridging home and school, fostering partnership for student success.</p>
+                
+                <ul>
+                    <li>Regular meetings to discuss school matters</li>
+                    <li>Volunteer opportunities for events and activities</li>
+                    <li>Workshops on parenting and child development</li>
+                    <li>Fundraising for school improvements</li>
+                    <li>Feedback channels for continuous enhancement</li>
+                </ul>
+                
+                <p>Join the PTA to actively contribute to your child's educational journey and the school community.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="upper-footer">
+            <h3>Notice of Nondiscriminatory Policy as to Students</h3>
+            <p>Ahmedan Anglo Oriental School welcomes students from all backgrounds and provides equal opportunities to every child. The school does not discriminate on the basis of race, color, religion, language, nationality, or social background in the administration of its educational programs, admissions, or activities. Every student is entitled to the same rights, respect, and learning opportunities within our inclusive environment.</p>
+        </div>
+        <img src="img/LOGO1.png" alt="Logo">
+        <hr>
+
+        <div class="lower-footer">
+            <div class="upper-links">
+                <a href="About.html">About</a>
+                <a href="Academics.html">Academics</a>
+                <a href="Admissions.html">Admission</a>
+                <a href="#">School Life</a>
+            </div>
+            <div class="lower-links">
+                <a href="#">Calendar</a>
+                <a href="#">Teachers</a>
+                <a href="#">Fees Structure</a>
+                <a href="#">Contact us</a>
+                <a href="#">Portal</a>
+            </div>
+        </div>
+        <div class="footer-icons">
+            <a href="https://www.facebook.com/p/Ahmedan-Anglo-Oriental-School-100057637891490/"><img src="https://cdn-icons-png.flaticon.com/128/20/20837.png" alt="facebook-icon"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1384/1384031.png" alt="insta-icon"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1384/1384028.png" alt="youtube-icon"></a>
+        </div>
+    </footer>
+
+    <script>
+        const buttons = document.querySelectorAll('.sidebar button');
+        const sections = document.querySelectorAll('.section');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const sectionId = button.dataset.section;
+
+                buttons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                sections.forEach(sec => sec.classList.remove('active'));
+                document.getElementById(sectionId).classList.add('active');
+
+                history.pushState(null, '', `#${sectionId}`);
+            });
+        });
+
+        // Handle initial load and hash change
+        function loadSectionFromHash() {
+            const hash = window.location.hash.slice(1);
+            if (hash) {
+                const targetButton = document.querySelector(`[data-section="${hash}"]`);
+                if (targetButton) {
+                    targetButton.click();
+                }
+            } else {
+                // Default to daily-schedule
+                document.querySelector('[data-section="daily-schedule"]').click();
+            }
+        }
+
+        window.addEventListener('load', loadSectionFromHash);
+        window.addEventListener('hashchange', loadSectionFromHash);
+
+        function scrollToContent() {
+            document.querySelector('.school-life-container').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

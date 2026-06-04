@@ -1,0 +1,804 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admissions - Ahmedan Anglo Oriental School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            font-size: 16px; /* Base font size for rem units */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .page1 {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 100vh; /* Flexible height */
+            min-height: 400px;
+        }
+
+        .bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1rem 2rem;
+            position: relative;
+            flex-wrap: wrap;
+        }
+
+        .left-side a img {
+            width: 7.5rem; /* rem for scalability */
+        }
+
+        .right-side a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+
+        .upper-menu,
+        .lower-menu {
+            display: flex;
+            gap: 1.5rem;
+            padding: 0.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .upper-menu {
+            margin-bottom: 1rem;
+            position: relative;
+            left: 0; /* Adjusted for mobile */
+        }
+
+        .lower-menu > .dropdown-link > a {
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            display: inline-block;
+        }
+
+        .dropdown-link:hover > a {
+            color: #0056b3;
+            transition: color 0.3s;
+        }
+
+        .dropdown-link {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 0.5rem;
+            z-index: 1000;
+            min-width: 30rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-link:hover .dropdown-content {
+            display: flex;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .mega-menu {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .menu-column {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .menu-image-placeholder img {
+            width: 15rem;
+            border-radius: 0.5rem;
+        }
+
+        .dropdown-content a {
+            color: #555;
+        }
+
+        .dropdown-content a:hover {
+            color: #0066cc;
+            transition: color 0.3s;
+        }
+
+        .page1 h1 {
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            transform: translate(-50%, -50%);
+            color: yellow;
+            -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+            text-align: center;
+            text-shadow: 5px 3px 5px black;
+            font-family: "EB Garamond", serif;
+            font-weight: 800;
+            font-size: 3rem;
+        }
+
+        .page1 button {
+            color: white;
+            background-image: linear-gradient(#8AC640, #FFF101);
+            padding: 1.25rem 2.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: monospace;
+            border-radius: 3rem;
+            position: absolute;
+            left: 50%;
+            top: 60%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .page1 button:hover {
+            background-color: #0056b3;
+            border-radius: 0;
+            width: 18rem;
+        }
+
+        .admissions-container {
+            display: flex;
+            max-width: 75rem;
+            margin: 3rem auto;
+            padding: 0 1rem;
+            flex-direction: column; /* Mobile-first */
+        }
+
+        .sidebar {
+            width: 100%;
+            background-color: #f0f0f0;
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .sidebar button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1.125rem;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar button.active {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        .sidebar button:hover {
+            background-color: #e46b0f;
+            color: white;
+        }
+
+        .content-area {
+            width: 100%;
+            padding: 1rem;
+        }
+
+        .section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: #0056b3;
+            font-family: 'EB Garamond', serif;
+            margin-bottom: 1rem;
+        }
+
+        .section p {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .steps {
+            max-width: 50rem;
+            margin: 0 auto 3rem;
+            text-align: left;
+        }
+
+        .step-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: white;
+            border-left: 0.3125rem solid #e46b0f;
+            box-shadow: 0 0.125rem 0.3125rem rgba(0,0,0,0.1);
+        }
+
+        .step-item h3 {
+            font-size: 1.75rem;
+            color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 3rem;
+        }
+
+        th, td {
+            padding: 0.9375rem;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #FED051;
+            color: #0056b3;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            font-size: 1.25rem;
+            color: #555;
+            text-align: left;
+        }
+
+        ul li {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        ul li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #e46b0f;
+        }
+
+        .apply-form {
+            max-width: 50rem;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 0.625rem;
+            box-shadow: 0 0.25rem 0.625rem rgba(0,0,0,0.1);
+        }
+
+        .apply-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .apply-form input, .apply-form select, .apply-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 0.3125rem;
+        }
+
+        .apply-form button {
+            width: 100%;
+            padding: 1rem;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 0.3125rem;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: background-color 0.3s;
+        }
+
+        .apply-form button:hover {
+            background-color: #e46b0f;
+        }
+
+        footer {
+            width: 100%;
+            background-color: #2D3778;
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        .upper-footer h3 {
+            font-size: 1.25rem;
+        }
+
+        .upper-footer p {
+            font-size: 1.125rem;
+            max-width: 50rem;
+            margin: 1rem auto;
+        }
+
+        footer img {
+            width: 7.5rem;
+            margin: 1rem 0;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: white;
+            margin: 1rem 0;
+        }
+
+        .lower-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .upper-links, .lower-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .upper-links a, .lower-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .footer-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-icons img {
+            width: 2.5rem;
+        }
+
+        /* Media Queries - Mobile-first enhancements */
+        @media (min-width: 480px) {
+            .page1 h1 {
+                font-size: 3.5rem;
+            }
+
+            .page1 button {
+                padding: 1.5rem 3rem;
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .admissions-container {
+                flex-direction: row;
+            }
+
+            .sidebar {
+                width: 25%;
+                border-bottom: none;
+                border-right: 1px solid #ddd;
+            }
+
+            .content-area {
+                width: 75%;
+            }
+
+            .upper-menu {
+                left: 15rem; /* Restore for larger screens */
+            }
+        }
+
+        @media (min-width: 1024px) {
+            header {
+                padding: 1.25rem 3.75rem;
+            }
+
+            .page1 {
+                height: 50vw;
+            }
+
+            .page1 h1 {
+                font-size: 4rem;
+            }
+        }
+
+        @media (min-width: 1440px) {
+            .admissions-container {
+                max-width: 90rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page1">
+        <img class="bg-video" src="img/IMG-20251018-WA0059.jpg" alt="Parents and staff discussing admissions">
+        
+        <header>
+            <div class="left-side">
+                <a href="index.html">
+                    <img src="img/LOGO1.png" alt="Ahmedan School Logo">
+                </a>
+            </div>
+
+            <div class="right-side">
+                <div class="upper-menu">
+                    <a href="#">Calendar</a>
+                    <a href="#">Teachers</a>
+                    <a href="#">Fees Structure</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Portal</a>
+                </div>
+
+                <div class="lower-menu">
+                    <div class="dropdown-link">
+                        <a href="About.html">About</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="About.html#overview">Overview</a>
+                                <a href="About.html#mission-vision">Our Mission & Vision</a>
+                                <a href="About.html#history-values">History & Values</a>
+                                <a href="About.html#leadership">School Leadership</a>
+                                <a href="About.html#staff-directory">Staff Directory</a>
+                                <a href="About.html#facilities">School Facilities</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0077.jpg" alt="Children at the School Playground">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-link">
+                        <a href="Academics.html">Academics</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="#">Curriculum Overview</a>
+                                <a href="#">Primary I (Grades 1-3)</a>
+                                <a href="#">Primary II (Grades 4-5)</a>
+                                <a href="#">Subjects Taught</a>
+                                <a href="#">Teaching Methodology</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0106.jpg" alt="Students in Classroom">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-link">
+                        <a href="#">Admissions</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="#overview-eligibility">Overview & Eligibility</a>
+                                <a href="#admission-process">Admission Process</a>
+                                <a href="#fee-structure">Fee Structure</a>
+                                <a href="#required-documents">Required Documents</a>
+                                <a href="#important-dates">Important Dates</a>
+                                <a href="#apply-online">Apply Online</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0059.jpg" alt="Parents talking to staff">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-link">
+                        <a href="School Life.html">School Life</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="#">Daily Schedule</a>
+                                <a href="#">Co-Curricular Activities</a>
+                                <a href="#">Sports & Games</a>
+                                <a href="#">School Events (Annual Day)</a>
+                                <a href="#">Uniform & Discipline</a>
+                                <a href="#">Parent-Teacher Association</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0036.jpg" alt="Children playing">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <h1>Admissions at Ahmedan Anglo Oriental School <br>Join Our Community of Learners</h1>
+        <button onclick="scrollToContent()">Start Your Application</button>
+    </div>
+
+    <div class="admissions-container">
+        <div class="sidebar">
+            <button data-section="overview-eligibility" class="active">Overview & Eligibility</button>
+            <button data-section="admission-process">Admission Process</button>
+            <button data-section="fee-structure">Fee Structure</button>
+            <button data-section="required-documents">Required Documents</button>
+            <button data-section="important-dates">Important Dates</button>
+            <button data-section="apply-online">Apply Online</button>
+        </div>
+        <div class="content-area">
+            <div id="overview-eligibility" class="section active">
+                <h2>Admissions Overview</h2>
+                <p>Ahmedan Anglo Oriental School welcomes applications from families who value quality education in a nurturing environment. Our admissions process is designed to be transparent and supportive, ensuring the best fit for both the student and the school.</p>
+                
+                <h2>Eligibility Criteria</h2>
+                <ul>
+                    <li><strong>Nursery:</strong> Children must be 3 years old by March 31 of the admission year.</li>
+                    <li><strong>Primary (Grades 1-5):</strong> Previous school records and an entrance test may be required.</li>
+                    <li><strong>Middle School (Grades 6-8):</strong> Academic performance review and interview.</li>
+                    <li>Open to all nationalities, with no discrimination based on race, religion, or background.</li>
+                    <li>Priority given to siblings of current students and children of alumni.</li>
+                </ul>
+                
+                <p>For any questions, contact our admissions office at admissions@ahmedanschool.edu or +92-XXX-XXXXXXX.</p>
+            </div>
+
+            <div id="admission-process" class="section">
+                <h2>Admission Process</h2>
+                <p>Our admission process is straightforward and family-friendly. Follow these steps to join our school community.</p>
+                
+                <div class="steps">
+                    <div class="step-item">
+                        <h3>Step 1: Inquiry</h3>
+                        <p>Contact us via phone, email, or visit our campus for an initial consultation.</p>
+                    </div>
+                    <div class="step-item">
+                        <h3>Step 2: Application</h3>
+                        <p>Submit the online application form with required documents.</p>
+                    </div>
+                    <div class="step-item">
+                        <h3>Step 3: Assessment</h3>
+                        <p>Students may need to take an entrance test or attend an interview.</p>
+                    </div>
+                    <div class="step-item">
+                        <h3>Step 4: Offer & Enrollment</h3>
+                        <p>Receive an admission offer and complete enrollment by paying fees.</p>
+                    </div>
+                    <div class="step-item">
+                        <h3>Step 5: Orientation</h3>
+                        <p>Attend our welcome orientation for new families.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="fee-structure" class="section">
+                <h2>Fee Structure</h2>
+                <p>Our fees are competitive and include all core educational services. Below is the fee structure for the 2025-2026 academic year.</p>
+                
+                <table>
+                    <tr>
+                        <th>Grade Level</th>
+                        <th>Admission Fee (One-time)</th>
+                        <th>Annual Tuition Fee</th>
+                        <th>Other Fees (Books, Uniform, etc.)</th>
+                    </tr>
+                    <tr>
+                        <td>Nursery</td>
+                        <td>PKR 10,000</td>
+                        <td>PKR 50,000</td>
+                        <td>PKR 5,000</td>
+                    </tr>
+                    <tr>
+                        <td>Primary (1-5)</td>
+                        <td>PKR 15,000</td>
+                        <td>PKR 80,000</td>
+                        <td>PKR 8,000</td>
+                    </tr>
+                    <tr>
+                        <td>Middle (6-8)</td>
+                        <td>PKR 20,000</td>
+                        <td>PKR 100,000</td>
+                        <td>PKR 10,000</td>
+                    </tr>
+                </table>
+                
+                <p>Fees are payable quarterly. Scholarships available for deserving students. Contact us for details.</p>
+            </div>
+
+            <div id="required-documents" class="section">
+                <h2>Required Documents</h2>
+                <p>To complete your application, please submit the following documents:</p>
+                
+                <ul>
+                    <li>Completed application form</li>
+                    <li>Birth certificate of the child</li>
+                    <li>Previous school records/transcripts</li>
+                    <li>Passport-sized photographs (child and parents)</li>
+                    <li>Copy of parent's CNIC or passport</li>
+                    <li>Medical fitness certificate</li>
+                    <li>Proof of residence</li>
+                </ul>
+                
+                <p>All documents must be submitted in original and photocopy format during the admission process.</p>
+            </div>
+
+            <div id="important-dates" class="section">
+                <h2>Important Dates for 2025-2026</h2>
+                <p>Mark these key dates for the upcoming academic year:</p>
+                
+                <table>
+                    <tr>
+                        <th>Event</th>
+                        <th>Date</th>
+                    </tr>
+                    <tr>
+                        <td>Admissions Open</td>
+                        <td>November 1, 2025</td>
+                    </tr>
+                    <tr>
+                        <td>Application Deadline</td>
+                        <td>February 28, 2026</td>
+                    </tr>
+                    <tr>
+                        <td>Entrance Tests</td>
+                        <td>March 15-20, 2026</td>
+                    </tr>
+                    <tr>
+                        <td>Admission Offers</td>
+                        <td>April 1, 2026</td>
+                    </tr>
+                    <tr>
+                        <td>School Starts</td>
+                        <td>April 15, 2026</td>
+                    </tr>
+                </table>
+                
+                <p>Dates are subject to change. Check our website or contact us for updates.</p>
+            </div>
+
+            <div id="apply-online" class="section">
+                <h2>Apply Online</h2>
+                <p>Start your journey with us by filling out the application form below.</p>
+                
+                <form class="apply-form" action="#" method="post">
+                    <label for="child-name">Child's Full Name:</label>
+                    <input type="text" id="child-name" name="child-name" required>
+                    
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" required>
+                    
+                    <label for="grade">Applying for Grade:</label>
+                    <select id="grade" name="grade" required>
+                        <option value="">Select Grade</option>
+                        <option value="nursery">Nursery</option>
+                        <option value="primary">Primary (1-5)</option>
+                        <option value="middle">Middle (6-8)</option>
+                    </select>
+                    
+                    <label for="parent-name">Parent/Guardian Name:</label>
+                    <input type="text" id="parent-name" name="parent-name" required>
+                    
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                    
+                    <label for="message">Additional Comments:</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
+                    
+                    <button type="submit">Submit Application</button>
+                </form>
+                
+                <p>Note: This is a sample form. In a real implementation, it would connect to a backend for processing.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="upper-footer">
+            <h3>Notice of Nondiscriminatory Policy as to Students</h3>
+            <p>Ahmedan Anglo Oriental School welcomes students from all backgrounds and provides equal opportunities to every child. The school does not discriminate on the basis of race, color, religion, language, nationality, or social background in the administration of its educational programs, admissions, or activities. Every student is entitled to the same rights, respect, and learning opportunities within our inclusive environment.</p>
+        </div>
+        <img src="img/LOGO1.png" alt="Logo">
+        <hr>
+
+        <div class="lower-footer">
+            <div class="upper-links">
+                <a href="About.html">About</a>
+                <a href="Academics.html">Academics</a>
+                <a href="#">Admission</a>
+                <a href="#">School Life</a>
+            </div>
+            <div class="lower-links">
+                <a href="#">Calendar</a>
+                <a href="#">Teachers</a>
+                <a href="#">Fees Structure</a>
+                <a href="#">Contact us</a>
+                <a href="#">Portal</a>
+            </div>
+        </div>
+        <div class="footer-icons">
+            <a href="https://www.facebook.com/p/Ahmedan-Anglo-Oriental-School-100057637891490/"><img src="https://cdn-icons-png.flaticon.com/128/20/20837.png" alt="facebook-icon"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1384/1384031.png" alt="insta-icon"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1384/1384028.png" alt="youtube-icon"></a>
+        </div>
+    </footer>
+
+    <script>
+        const buttons = document.querySelectorAll('.sidebar button');
+        const sections = document.querySelectorAll('.section');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const sectionId = button.dataset.section;
+
+                buttons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                sections.forEach(sec => sec.classList.remove('active'));
+                document.getElementById(sectionId).classList.add('active');
+
+                history.pushState(null, '', `#${sectionId}`);
+            });
+        });
+
+        // Handle initial load and hash change
+        function loadSectionFromHash() {
+            const hash = window.location.hash.slice(1);
+            if (hash) {
+                const targetButton = document.querySelector(`[data-section="${hash}"]`);
+                if (targetButton) {
+                    targetButton.click();
+                }
+            } else {
+                // Default to overview-eligibility
+                document.querySelector('[data-section="overview-eligibility"]').click();
+            }
+        }
+
+        window.addEventListener('load', loadSectionFromHash);
+        window.addEventListener('hashchange', loadSectionFromHash);
+
+        function scrollToContent() {
+            document.querySelector('.admissions-container').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

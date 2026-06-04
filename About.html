@@ -1,0 +1,757 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Ahmedan Anglo Oriental School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+        }
+
+        .page1 {
+            position: relative;
+            overflow: hidden;
+            width: 100vw;
+            height: 50vw;
+        }
+
+        .bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px 60px;
+            position: relative;
+        }
+
+        .left-side a img {
+            width: 120px;
+        }
+
+        .right-side a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+
+        .upper-menu,
+        .lower-menu {
+            display: flex;
+            gap: 30px;
+            padding: 10px 0;
+        }
+
+        .upper-menu {
+            margin-bottom: 20px;
+            position: relative;
+            left: 250px;
+        }
+
+        .lower-menu > .dropdown-link > a {
+            font-size: 27px;
+            font-weight: bold;
+            padding: 10px 15px;
+            display: inline-block;
+        }
+
+        .dropdown-link:hover > a {
+            color: #0056b3;
+            transition: 0.3s;
+        }
+
+        .dropdown-link {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 25px 40px;
+            border-radius: 8px;
+            z-index: 1000;
+            min-width: 550px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-link:hover .dropdown-content {
+            display: flex;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .mega-menu {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .menu-column {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .menu-image-placeholder img {
+            width: 250px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .dropdown-content a {
+            color: #555;
+        }
+
+        .dropdown-content a:hover {
+            color: #0066cc;
+            transition: color 0.3s;
+        }
+
+        .page1 h1 {
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            transform: translate(-50%, -50%);
+            color: yellow;
+            -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+            text-align: center;
+            text-shadow: 5px 3px 5px black;
+            font-family: "EB Garamond", serif;
+            font-weight: 800;
+            font-size: 50px;
+        }
+
+        .page1 button {
+            color: white;
+            background-image: linear-gradient(#8AC640, #FFF101);
+            padding: 20px 40px;
+            font-size: 25px;
+            font-weight: 800;
+            font-family: monospace;
+            border-radius: 50px;
+            position: absolute;
+            left: 50%;
+            top: 60%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+        }
+
+        .page1 button:hover {
+            background-color: #0056b3;
+            border-radius: 0;
+            width: 300px;
+        }
+
+        .about-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .sidebar {
+            width: 25%;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .sidebar button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            text-align: left;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar button.active {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        .sidebar button:hover {
+            background-color: #e46b0f;
+            color: white;
+        }
+
+        .content-area {
+            width: 75%;
+            padding: 20px;
+        }
+
+        .section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .section h2 {
+            font-size: 40px;
+            color: #0056b3;
+            font-family: 'EB Garamond', serif;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            font-size: 24px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .facts-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .fact-box {
+            width: 200px;
+            padding: 20px;
+            background-color: #FED051;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            margin: 10px;
+        }
+
+        .fact-box h3 {
+            font-size: 50px;
+            color: #e46b0f;
+        }
+
+        .fact-box p {
+            font-size: 20px;
+            color: #0056b3;
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            text-align: left;
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-left: 5px solid #e46b0f;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item h3 {
+            font-size: 28px;
+            color: #0056b3;
+        }
+
+        .leader {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .leader h3 {
+            font-size: 28px;
+            color: #e46b0f;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 50px;
+        }
+
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #FED051;
+            color: #0056b3;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            font-size: 20px;
+            color: #555;
+            text-align: left;
+        }
+
+        ul li {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        ul li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #e46b0f;
+        }
+
+        @media (max-width: 768px) {
+            .about-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .content-area {
+                width: 100%;
+            }
+        }
+
+        footer {
+            width: 100vw;
+            background-color: #2D3778;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .upper-footer h3 {
+            font-size: 20px;
+        }
+
+        .upper-footer p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        footer img {
+            width: 120px;
+            margin: 20px 0;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: white;
+            margin: 20px 0;
+        }
+
+        .lower-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .upper-links a, .lower-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .footer-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .footer-icons img {
+            width: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page1">
+        <img class="bg-video" src="img/IMG-20251018-WA0077.jpg" alt="School Background">
+        
+        <header>
+            <div class="left-side">
+                <a href="index.html">
+                    <img src="img/LOGO1.png" alt="Ahmedan School Logo">
+                </a>
+            </div>
+
+            <div class="right-side">
+                <div class="upper-menu">
+                    <a href="#">Calendar</a>
+                    <a href="#">Teachers</a>
+                    <a href="#">Fees Structure</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Portal</a>
+                </div>
+
+                <div class="lower-menu">
+                    <div class="dropdown-link">
+                        <a href="#">About</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="#overview">Overview</a>
+                                <a href="#mission-vision">Our Mission & Vision</a>
+                                <a href="#history-values">History & Values</a>
+                                <a href="#leadership">School Leadership</a>
+                                <a href="#staff-directory">Staff Directory</a>
+                                <a href="#facilities">School Facilities</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0077.jpg" alt="Children at the School Playground">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-link">
+                        <a href="Academics.html">Academics</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="#">Curriculum Overview</a>
+                                <a href="#">Primary I (Grades 1-3)</a>
+                                <a href="#">Primary II (Grades 4-5)</a>
+                                <a href="#">Subjects Taught</a>
+                                <a href="#">Teaching Methodology</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0106.jpg" alt="Students in Classroom">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-link">
+                        <a href="Admissions.html">Admissions</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="#">Overview & Eligibility</a>
+                                <a href="#">Admission Process</a>
+                                <a href="#">Fee Structure</a>
+                                <a href="#">Required Documents</a>
+                                <a href="#">Important Dates</a>
+                                <a href="#">Apply Online</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0059.jpg" alt="Parents talking to staff">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-link">
+                        <a href="School Life.html">School Life</a>
+                        <div class="dropdown-content mega-menu">
+                            <div class="menu-column">
+                                <a href="#">Daily Schedule</a>
+                                <a href="#">Co-Curricular Activities</a>
+                                <a href="#">Sports & Games</a>
+                                <a href="#">School Events (Annual Day)</a>
+                                <a href="#">Uniform & Discipline</a>
+                                <a href="#">Parent-Teacher Association</a>
+                            </div>
+                            <div class="menu-image-placeholder">
+                                <img src="img/IMG-20251018-WA0036.jpg" alt="Children playing">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <h1>About Ahmedan Anglo Oriental School <br>Discover Our Story and Values</h1>
+        <button onclick="scrollToContent()">Explore About Us</button>
+    </div>
+
+    <div class="about-container">
+        <div class="sidebar">
+            <button data-section="overview" class="active">Overview</button>
+            <button data-section="mission-vision">Our Mission & Vision</button>
+            <button data-section="history-values">History & Values</button>
+            <button data-section="leadership">School Leadership</button>
+            <button data-section="staff-directory">Staff Directory</button>
+            <button data-section="facilities">School Facilities</button>
+        </div>
+        <div class="content-area">
+            <div id="overview" class="section active">
+                <h2>At a Glance</h2>
+                <p>Quick facts about our school.</p>
+                
+                <div class="facts-grid">
+                    <div class="fact-box">
+                        <h3>1990</h3>
+                        <p>Founded</p>
+                    </div>
+                    <div class="fact-box">
+                        <h3>N-8</h3>
+                        <p>Grades</p>
+                    </div>
+                    <div class="fact-box">
+                        <h3>500+</h3>
+                        <p>Students</p>
+                    </div>
+                    <div class="fact-box">
+                        <h3>50</h3>
+                        <p>Faculty</p>
+                    </div>
+                </div>
+                
+                <h2>Accreditations & Memberships</h2>
+                <ul>
+                    <li>• Central Board of Secondary Education (CBSE) Affiliated</li>
+                    <li>• Member of the Association of Schools and Colleges</li>
+                    <li>• Recognized by the State Education Department</li>
+                    <li>• ISO Certified for Quality Education</li>
+                </ul>
+                
+                <h2>Our Commitment</h2>
+                <p>We are dedicated to providing a nurturing environment where students can thrive academically, socially, and morally. Our holistic approach ensures that every child receives a well-rounded education.</p>
+            </div>
+
+            <div id="mission-vision" class="section">
+                <h2>Mission Statement</h2>
+                <p>To provide quality education that nurtures intellectual curiosity, moral integrity, and social responsibility, preparing students to become compassionate leaders and lifelong learners.</p>
+                
+                <h2>Vision Statement</h2>
+                <p>To be a leading educational institution recognized for excellence in holistic education, innovation, and community engagement, empowering students to excel in a global society.</p>
+            </div>
+
+            <div id="history-values" class="section">
+                <h2>Our History</h2>
+                <p>Founded in 1990 in Shikarpur, Sindh, Pakistan, Ahmedan Anglo Oriental School was established to offer a blend of modern and traditional education, drawing inspiration from the legacy of Sir Syed Ahmad Khan's educational reforms.</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>1990: Founding</h3>
+                        <p>The school was founded as a primary institution with a mission to provide accessible education to local children.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>2000: Expansion to Middle School</h3>
+                        <p>Expanded facilities and curriculum to include middle school grades, introducing more subjects and extracurricular activities.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>2010: Introduction of Grade 8</h3>
+                        <p>Added higher grades and modernized infrastructure, including science labs and computer facilities.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>2020: Digital Transformation</h3>
+                        <p>Adopted online learning tools and enhanced teacher training during the global pandemic.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>2025: 35th Anniversary</h3>
+                        <p>Celebrating 35 years of excellence with new initiatives for student development.</p>
+                    </div>
+                </div>
+                
+                <h2>Our Values</h2>
+                <ul>
+                    <li><strong>Excellence:</strong> Striving for the highest standards in education and personal growth.</li>
+                    <li><strong>Integrity:</strong> Upholding honesty, ethics, and moral principles in all actions.</li>
+                    <li><strong>Respect:</strong> Fostering a culture of mutual respect and inclusivity.</li>
+                    <li><strong>Innovation:</strong> Encouraging creativity and adaptability in learning.</li>
+                    <li><strong>Community:</strong> Building strong ties with families and the local community.</li>
+                </ul>
+            </div>
+
+            <div id="leadership" class="section">
+                <h2>Leadership Team</h2>
+                
+                <div class="leader">
+                    <h3>Principal: Mr. Ahmed Khan</h3>
+                    <p>With over 20 years of experience in education, Mr. Khan leads the school with a focus on innovation and student-centered learning.</p>
+                </div>
+                
+                <div class="leader">
+                    <h3>Vice Principal: Ms. Fatima Ali</h3>
+                    <p>Ms. Ali oversees academic programs and ensures high standards in teaching and curriculum development.</p>
+                </div>
+                
+                <div class="leader">
+                    <h3>Head of Primary: Mr. Bilal Hussain</h3>
+                    <p>Mr. Hussain manages the primary section, emphasizing foundational skills and holistic development.</p>
+                </div>
+                
+                <div class="leader">
+                    <h3>Head of Middle School: Ms. Sara Malik</h3>
+                    <p>Ms. Malik focuses on preparing students for higher education through rigorous academics and extracurricular activities.</p>
+                </div>
+            </div>
+
+            <div id="staff-directory" class="section">
+                <h2>Teaching Staff</h2>
+                
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Email</th>
+                    </tr>
+                    <tr>
+                        <td>Mr. Ahmed Khan</td>
+                        <td>Principal</td>
+                        <td>ahmed.khan@ahmedanschool.edu</td>
+                    </tr>
+                    <tr>
+                        <td>Ms. Fatima Ali</td>
+                        <td>Vice Principal</td>
+                        <td>fatima.ali@ahmedanschool.edu</td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Bilal Hussain</td>
+                        <td>Math Teacher</td>
+                        <td>bilal.hussain@ahmedanschool.edu</td>
+                    </tr>
+                    <tr>
+                        <td>Ms. Sara Malik</td>
+                        <td>English Teacher</td>
+                        <td>sara.malik@ahmedanschool.edu</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </table>
+                
+                <h2>Administrative Staff</h2>
+                
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Email</th>
+                    </tr>
+                    <tr>
+                        <td>Mr. Omar Shah</td>
+                        <td>Administrator</td>
+                        <td>omar.shah@ahmedanschool.edu</td>
+                    </tr>
+                    <tr>
+                        <td>Ms. Aisha Khan</td>
+                        <td>Receptionist</td>
+                        <td>aisha.khan@ahmedanschool.edu</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </table>
+            </div>
+
+            <div id="facilities" class="section">
+                <h2>Our Facilities</h2>
+                
+                <ul>
+                    <li><strong>Classrooms:</strong> Spacious, well-lit classrooms equipped with modern teaching aids.</li>
+                    <li><strong>Science Laboratories:</strong> Fully equipped labs for physics, chemistry, and biology experiments.</li>
+                    <li><strong>Computer Lab:</strong> State-of-the-art computers with high-speed internet for digital learning.</li>
+                    <li><strong>Library:</strong> Extensive collection of books, journals, and digital resources.</li>
+                    <li><strong>Playground:</strong> Large outdoor area for sports and recreational activities.</li>
+                    <li><strong>Auditorium:</strong> Multi-purpose hall for events, assemblies, and performances.</li>
+                    <li><strong>Cafeteria:</strong> Hygienic dining area serving nutritious meals.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="upper-footer">
+            <h3>Notice of Nondiscriminatory Policy as to Students</h3>
+            <p>Ahmedan Anglo Oriental School welcomes students from all backgrounds and provides equal opportunities to every child. The school does not discriminate on the basis of race, color, religion, language, nationality, or social background in the administration of its educational programs, admissions, or activities. Every student is entitled to the same rights, respect, and learning opportunities within our inclusive environment.</p>
+        </div>
+        <img src="img/LOGO1.png" alt="Logo">
+        <hr>
+
+        <div class="lower-footer">
+            <div class="upper-links">
+                <a href="#">About</a>
+                <a href="#">Academics</a>
+                <a href="#">Admission</a>
+                <a href="#">School Life</a>
+            </div>
+            <div class="lower-links">
+                <a href="#">Calendar</a>
+                <a href="#">Teachers</a>
+                <a href="#">Fees Structure</a>
+                <a href="#">Contact us</a>
+                <a href="#">Portal</a>
+            </div>
+        </div>
+        <div class="footer-icons">
+            <a href="https://www.facebook.com/p/Ahmedan-Anglo-Oriental-School-100057637891490/"><img src="https://cdn-icons-png.flaticon.com/128/20/20837.png" alt="facebook-icon"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1384/1384031.png" alt="insta-icon"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1384/1384028.png" alt="youtube-icon"></a>
+        </div>
+    </footer>
+
+    <script>
+        const buttons = document.querySelectorAll('.sidebar button');
+        const sections = document.querySelectorAll('.section');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const sectionId = button.dataset.section;
+
+                buttons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                sections.forEach(sec => sec.classList.remove('active'));
+                document.getElementById(sectionId).classList.add('active');
+
+                history.pushState(null, '', `#${sectionId}`);
+            });
+        });
+
+        // Handle initial load and hash change
+        function loadSectionFromHash() {
+            const hash = window.location.hash.slice(1);
+            if (hash) {
+                const targetButton = document.querySelector(`[data-section="${hash}"]`);
+                if (targetButton) {
+                    targetButton.click();
+                }
+            } else {
+                // Default to overview
+                document.querySelector('[data-section="overview"]').click();
+            }
+        }
+
+        window.addEventListener('load', loadSectionFromHash);
+        window.addEventListener('hashchange', loadSectionFromHash);
+
+        function scrollToContent() {
+            document.querySelector('.about-container').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
