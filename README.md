@@ -8,7 +8,7 @@ This project is designed as a multi-section educational website showcasing schoo
 ## 🌐 Live Demo
 
 ```
-👉 https://takeo-dev.github.io/school-website/
+https://takeo-dev.github.io/school-website/
 ```
 
 ---
